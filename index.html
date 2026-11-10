@@ -226,6 +226,70 @@ img:hover {
   }
 })();
 </script>
+  
+<script>
+(function () {
+  const ID = "G-4867XN85DD";
+  const KEY = "lina-cookie-consent";
+  let loaded = false;
+
+  function hasConsent() {
+    try {
+      return localStorage.getItem(KEY) === "accepted";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function enableAnalytics() {
+    if (loaded || !hasConsent()) return;
+    loaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      dataLayer.push(arguments);
+    };
+
+    gtag("js", new Date());
+    gtag("consent", "default", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied"
+    });
+    gtag("config", ID);
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src =
+      "https://www.googletagmanager.com/gtag/js?id=" + ID;
+    document.head.appendChild(script);
+  }
+
+  function updateConsent() {
+    if (hasConsent()) {
+      enableAnalytics();
+    } else if (loaded) {
+      gtag("consent", "update", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
+
+      location.reload();
+    }
+  }
+
+  window.addEventListener(
+    "lina-consent-updated",
+    updateConsent
+  );
+
+  updateConsent();
+})();
+</script>
+
 </body>
 </html>
 
