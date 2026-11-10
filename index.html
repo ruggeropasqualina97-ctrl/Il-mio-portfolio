@@ -170,6 +170,62 @@ img:hover {
 <p>© 2026 Lina Portraits</p>
 <p>Disegni e ritratti realizzati a mano con passione ❤️</p>
 </footer>
+  
+<!-- Banner consenso cookie -->
+<div id="cookie-banner" role="dialog" aria-label="Preferenze cookie" style="display:none;position:fixed;bottom:15px;left:50%;transform:translateX(-50%);width:calc(100% - 30px);max-width:550px;box-sizing:border-box;background:#F3EBE2;color:#6B4F3A;padding:20px;border-radius:12px;box-shadow:0 2px 15px #0003;text-align:center;z-index:9999;">
+  <h3>Privacy e cookie 🍪</h3>
+  <p>Vorrei utilizzare Google Analytics per conoscere le visite al sito e migliorare Lina Portraits. Puoi accettare o rifiutare i cookie statistici. La tua scelta non impedisce di navigare.</p>
+  <p><a href="#privacy" style="color:#6B4F3A;">Leggi la Privacy Policy</a></p>
+  <button id="accept-cookies" type="button" style="background:#6B4F3A;color:white;padding:12px 20px;border:0;border-radius:8px;cursor:pointer;margin:5px;">Accetta</button>
+  <button id="reject-cookies" type="button" style="background:white;color:#6B4F3A;padding:12px 20px;border:1px solid #6B4F3A;border-radius:8px;cursor:pointer;margin:5px;">Rifiuta</button>
+</div>
+
+<button id="cookie-settings" type="button" style="position:fixed;bottom:12px;left:12px;background:#6B4F3A;color:white;border:0;border-radius:8px;padding:10px;cursor:pointer;z-index:9998;">
+  Preferenze cookie
+</button>
+
+<script>
+(function () {
+  const banner = document.getElementById("cookie-banner");
+  const settings = document.getElementById("cookie-settings");
+  const key = "lina-cookie-consent";
+
+  function showBanner() {
+    banner.style.display = "block";
+    settings.style.display = "none";
+  }
+
+  function choose(value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (error) {
+      // La navigazione resta possibile.
+    }
+    banner.style.display = "none";
+    settings.style.display = "block";
+    window.dispatchEvent(new Event("lina-consent-updated"));
+  }
+
+  document.getElementById("accept-cookies").onclick =
+    function () { choose("accepted"); };
+
+  document.getElementById("reject-cookies").onclick =
+    function () { choose("rejected"); };
+
+  settings.onclick = showBanner;
+
+  let saved = null;
+  try {
+    saved = localStorage.getItem(key);
+  } catch (error) {}
+
+  if (saved === "accepted" || saved === "rejected") {
+    settings.style.display = "block";
+  } else {
+    showBanner();
+  }
+})();
+</script>
 </body>
 </html>
 
