@@ -21,6 +21,20 @@ img {
 img:hover {
   transform: scale(1.05);
 }
+
+#disegni > div {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+#disegni p {
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 0 10px;
+  color: #6B4F3A;
+}
+  
 </style>
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -32,7 +46,8 @@ img:hover {
 <p style="text-align:center;margin:25px 0;"><a href="#disegni" style="background-color:#6B4F3A;color:white;padding:12px 22px;border-radius:8px;text-decoration:none;display:inline-block;">🎨 Scopri i miei disegni</a></p>
 <h2 id="chi-sono" style="text-align:center;color:#6B4F3A;">Chi sono</h2>
 <p style="text-align:center;font-size:clamp(18px,2.5vw,22px);line-height:1.7;max-width:750px;margin:20px auto 35px;padding:0 15px;">Sono un'artista specializzata in disegni a mano e ritratti personalizzati. Ogni mia opera nasce dalla passione per l'arte e viene realizzata con cura, attenzione ai dettagli e uno stile personale.</p>
-<div id="disegni" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;">
+<div id="disegni" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr));gap:25px;max-width:850px;margin:30px auto;padding:0 15px;align-items:start;">
+
 <div style="text-align:center;">
  <a href="cavallo.jpg" target="_blank"> <img src="cavallo.jpg" alt="Disegno di un cavallo" style="width:100%;max-width:300px;height:auto;border-radius:15px;">
  </a>
